@@ -11,4 +11,4 @@ return res.status(200).json({message : "api rodando com sucesso"})
 
 app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);
-});
+});   
