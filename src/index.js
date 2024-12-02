@@ -1,17 +1,13 @@
 const express = require("express");
+const connect = require("./database/conection");
+const userRoutes = require('./routes/userRoutes');
+
 const app = express();
-const PORT = 3000;
+connect();
 
-// Carregar variáveis de ambiente
-require("dotenv").config();
+app.use(express.json());
+app.use('/api', userRoutes); 
 
-// Importar a conexão com o banco de dados
-require("./database/conection");
-
-app.get('/', async (req, res) => {
-  return res.status(200).json({ message: "API rodando com sucesso!" });
-});
-
-app.listen(PORT, () => {
-  console.log(`Servidor rodando em http://localhost:${PORT}`);
+app.listen(3000, () => {
+  console.log(`Servidor rodando na porta 3000`);
 });
