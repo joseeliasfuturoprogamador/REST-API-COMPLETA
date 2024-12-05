@@ -1,10 +1,9 @@
 const User = require('../models/UsuariosSechema');
 
 const createUser = async (userData) => {
-    try {
-      const user = await User.create(userData);
-      if(user) 
-        res.status(200).json({message: "Usuário criado com sucesso"})
+  try {
+    const user = await User.create(userData);
+    return user;
   } catch (error) {
     throw new Error('Erro ao criar usuário: ' + error.message);
   }

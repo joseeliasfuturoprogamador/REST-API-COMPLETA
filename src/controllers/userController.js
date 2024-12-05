@@ -1,12 +1,10 @@
 const userService = require('../services/userService')
-const usuário = require('../models/UsuariosSechema')
+const User = require('../models/UsuariosSechema')
 
 const createUser = async (req, res) => {
     try {
-        const user = await userService.createUser(req.body);
-        if(user){
-            res.status(2001).json({message: "criado com sucesso!"});
-        }
+        const {user}= await userService.createUser(req.body);
+        res.status(201).json({message: "criado com sucesso"});
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
