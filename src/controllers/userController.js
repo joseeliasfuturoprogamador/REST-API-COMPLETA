@@ -2,9 +2,17 @@ const userService = require('../services/userService')
 const User = require('../models/UsuariosSechema')
 
 const createUser = async (req, res) => {
+    const { cpf, name, idade, email } = req.body;
+
+    if (!cpf || !name || !idade || !email) {
+        return res.status(400).json({
+            message: "Todos os campos são obrigatórios: CPF, name, idade e email"
+        });
+    }
+
     try {
-        const {user}= await userService.createUser(req.body);
-        res.status(201).json({message: "criado com sucesso"});
+        const { user } = await userService.createUser(req.body);
+        res.status(201).json({ message: "Usuário criado com sucesso", user });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
@@ -37,10 +45,10 @@ const updateUserById = async (req, res) => {
     }
 };
 
-const deletUserById = async (req, res) => {
+const deleteUserById = async (req, res) => {
     try {
-        await userService.deletUserById(re.params.id);
-        res.status(204).send();
+        await userService.deleteUserById(req.params.id);
+        return res.status(200).json({message:  "Deletado com sucesso"});
     } catch (error) {
         res.status(404).json({ error: error.message })
     }
@@ -50,9 +58,9 @@ const deletUserById = async (req, res) => {
 
 
 module.exports = {
-createUser,
-getAllUsers,
-getUserById,
-updateUserById,
-deletUserById,
+    createUser,
+    getAllUsers,
+    getUserById,
+    updateUserById,
+    deleteUserById,
 };
