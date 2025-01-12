@@ -13,7 +13,7 @@ const connect = async () => {
   } catch (err) {
     console.error("Erro ao conectar no banco de dados:", err);
     process.exit(1); 
-  }
+  };
 };
 
 module.exports = connect;
